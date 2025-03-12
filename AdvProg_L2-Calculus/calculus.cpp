@@ -18,9 +18,16 @@ double mySqrt(double x);
     Returns:
         double: cosine of x
 ***/
-double myCos(double x) 
+double myCos(double x)
 {
-    return 0.0;
+    double result = 1.0;
+    double term = 1.0;
+    int n = 1;
+    for (int i = 1; i <= 10; i++) {
+        term *= -x * x / ((2 * i - 1) * (2 * i));
+        result += term;
+    }
+    return result;
 }
 
 /***
@@ -31,7 +38,14 @@ double myCos(double x)
 ***/
 double mySin(double x)
 {
-    return 0.0;
+    double result = x;
+    double term = x;
+    int n = 1;
+    for (int i = 1; i <= 10; i++) {
+        term *= -x * x / ((2 * i) * (2 * i + 1));
+        result += term;
+    }
+    return result;
 }
 
 
@@ -47,6 +61,10 @@ double mySqrt(double x) {
         exit(1);
     }
 
-    
-    return 0;
+    double guess = x;
+    double epsilon = 1e-6;
+    while (fabs(guess * guess - x) > epsilon) {
+        guess = (guess + x / guess) / 2;
+    }
+    return guess;
 }
